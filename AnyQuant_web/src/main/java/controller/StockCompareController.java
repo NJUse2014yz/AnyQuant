@@ -28,7 +28,7 @@ public class StockCompareController {
 		StockListInf inf2=null;
 		if(id1==null||id2==null){
 			inf1=stockBl.showSingleStock("sh600000");
-			inf2=stockBl.showSingleStock("sh600004");
+			inf2=stockBl.showSingleStock("sh600200");
 		}else{
 			inf1=stockBl.showSingleStock(id1);
 			inf2=stockBl.showSingleStock(id2);
