@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.RealTimeDataMapper">
+	<update id="createRealTimeDataTable" parameterType="String">
+		create table AnyQuant.RealTimeData_${value}
+			(
+			    increPer double,
+			    increase double,
+			    name varchar(32),
+			    todayStartPri double,
+			    yestodEndPri double,
+			    nowPri double,
+			    todayMax double,
+			    todayMin double,
+			    competitivePri double,
+			    reservePri double,
+			    traNumber long,
+			    traAmount double,
+			    buyOne long,
+			    buyOnePri double,
+			    buyTwo long,
+			    buyTwoPri double,
+			    buyThree long,
+			    buyThreePri double,
+			    buyFour long,
+			    buyFourPri double,
+			    buyFive long,
+			    buyFivePri double,
+			    sellOne long,
+			    sellOnePri double,
+			    sellTwo long,
+			    sellTwoPri double,
+			    sellThree long,
+			    sellThreePri double,
+			    sellFour long,
+			    sellFourPri double,
+			    sellFive long,
+			    sellFivePri double,
+			    date date not null,
+			    time time not null primary key
+			)default charset=utf8
+	</update>
+	<delete id="dropRealTimeDataTable" parameterType="String">
+		drop table anyquant.realtimedata_${value}
+	</delete>
+	
+	<delete id="initRealTimeDataTable" parameterType="String">
+		delete from anyquant.realtimedata_${value}
+	</delete>
+	<delete id="initRealTimeData_all" parameterType="List">
+		<foreach collection="list" item="item" separator=";">
+			delete from anyquant.realtimedata_${item}
+		</foreach>
+	</delete>
+	
+	<insert id="insertRealTimeData_single" parameterType="RealTimeDataPack">
+		insert into AnyQuant.realtimedata_${siid}
+		(increPer,increase,name,todayStartPri,yestodEndPri,nowPri,todayMax,todayMin,competitivePri,reservePri,traNumber,traAmount,buyOne,buyOnePri,buyTwo,buyTwoPri,buyThree,buyThreePri,buyFour,buyFourPri,buyFive,buyFivePri,sellOne,sellOnePri,sellTwo,sellTwoPri,sellThree,sellThreePri,sellFour,sellFourPri,sellFive,sellFivePri,date,time)
+		values(#{realTimeData1.increPer},#{realTimeData1.increase},#{realTimeData1.name},#{realTimeData1.todayStartPri},#{realTimeData1.yestodEndPri},#{realTimeData1.nowPri},#{realTimeData1.todayMax},#{realTimeData1.todayMin},#{realTimeData1.competitivePri},#{realTimeData1.reservePri},#{realTimeData1.traNumber},#{realTimeData1.traAmount},#{realTimeData1.buyOne},#{realTimeData1.buyOnePri},#{realTimeData1.buyTwo},#{realTimeData1.buyTwoPri},#{realTimeData1.buyThree},#{realTimeData1.buyThreePri},#{realTimeData1.buyFour},#{realTimeData1.buyFourPri},#{realTimeData1.buyFive},#{realTimeData1.buyFivePri},#{realTimeData1.sellOne},#{realTimeData1.sellOnePri},#{realTimeData1.sellTwo},#{realTimeData1.sellTwoPri},#{realTimeData1.sellThree},#{realTimeData1.sellThreePri},#{realTimeData1.sellFour},#{realTimeData1.sellFourPri},#{realTimeData1.sellFive},#{realTimeData1.sellFivePri},#{realTimeData1.date},#{realTimeData1.time})
+	</insert>
+	<insert id="insertRealTimeData_all" parameterType="RealTimeDataPack">
+		<foreach collection="list" item="realTimeData" separator=";">
+			insert into anyquant.realtimedata_${realTimeData.gid}
+			(increPer,increase,name,todayStartPri,yestodEndPri,nowPri,todayMax,todayMin,competitivePri,reservePri,traNumber,traAmount,buyOne,buyOnePri,buyTwo,buyTwoPri,buyThree,buyThreePri,buyFour,buyFourPri,buyFive,buyFivePri,sellOne,sellOnePri,sellTwo,sellTwoPri,sellThree,sellThreePri,sellFour,sellFourPri,sellFive,sellFivePri,date,time)
+			values(#{realTimeData.increPer},#{realTimeData.increase},#{realTimeData.name},#{realTimeData.todayStartPri},#{realTimeData.yestodEndPri},#{realTimeData.nowPri},#{realTimeData.todayMax},#{realTimeData.todayMin},#{realTimeData.competitivePri},#{realTimeData.reservePri},#{realTimeData.traNumber},#{realTimeData.traAmount},#{realTimeData.buyOne},#{realTimeData.buyOnePri},#{realTimeData.buyTwo},#{realTimeData.buyTwoPri},#{realTimeData.buyThree},#{realTimeData.buyThreePri},#{realTimeData.buyFour},#{realTimeData.buyFourPri},#{realTimeData.buyFive},#{realTimeData.buyFivePri},#{realTimeData.sellOne},#{realTimeData.sellOnePri},#{realTimeData.sellTwo},#{realTimeData.sellTwoPri},#{realTimeData.sellThree},#{realTimeData.sellThreePri},#{realTimeData.sellFour},#{realTimeData.sellFourPri},#{realTimeData.sellFive},#{realTimeData.sellFivePri},#{realTimeData.date},#{realTimeData.time})
+		</foreach>
+	</insert>
+   	
+   	<delete id="deleteRealTimeData_e_time" parameterType="DatePack">
+		delete from anyquant.realtimedata_${siid}
+		where time=#{time1}
+	</delete>
+   	
+   	<select id="selectRealTimeDataDate" parameterType="String" resultType="java.sql.Date">
+   		select max(date) from anyquant.realtimedata_${value} 
+   	</select>
+   	<select id="selectRealTimeDataTime_max" parameterType="String" resultType="java.sql.Time">
+   		select max(time) from anyquant.realtimedata_${value}
+   	</select>
+   	
+   	<select id="selectRealTimeData_all" parameterType="DatePack" resultType="RealTimeData">
+		select * from anyquant.realtimedata_${siid}
+		order by time
+   	</select>
+   	<select id="selectRealTimeData_e_time" parameterType="DatePack" resultType="RealTimeData">
+		select * from anyquant.realtimedata_${siid}
+		where time=#{time1}
+	</select>
+   	<select id="selectRealTimeData_ge_time" parameterType="DatePack" resultType="RealTimeData">
+		select * from anyquant.realtimedata_${siid}
+		where time &gt;= #{time1}
+		order by time
+	</select>
+	<select id="selectRealTimeData_le_time" parameterType="DatePack" resultType="RealTimeData">
+		select * from anyquant.realtimedata_${siid}
+		where time &lt;= #{time1}
+		order by time
+	</select>
+	<select id="selectRealTimeData_g_time" parameterType="DatePack" resultType="RealTimeData">
+		select * from anyquant.realtimedata_${siid}
+		where time &gt; #{time1}
+		order by time
+	</select>
+   	<select id="selectRealTimeData_l_time" parameterType="DatePack" resultType="RealTimeData">
+		select * from anyquant.realtimedata_${siid}
+		where time &lt; #{time1}
+		order by time
+	</select>
+	<select id="selectRealTimeData_b_time" parameterType="DatePack" resultType="RealTimeData">
+		select * from anyquant.realtimedata_${siid}
+		where time between #{time1} and #{time2}
+		order by time
+	</select>
+</mapper>

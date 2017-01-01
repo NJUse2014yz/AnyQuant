@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.HistoryStockDataMapper">
+	<update id="createHistoryStockDataTrack">
+		create table anyquant.historystockdatatrack
+		(
+			grailId varchar(16) not null,
+			id int(11) not null
+		)
+	</update>
+	<insert id="insertHistoryStockDataTrack" parameterType="String">
+		insert into anyquant.historystockdatatrack
+		(grailId,id)
+		values(#{value},0)
+	</insert>
+	<update id="updateHistoryStockDataTrack" parameterType="HistoryStockDataTrack">
+		update anyquant.historystockdatatrack
+		set id=#{id} where grailId=#{grailId}
+	</update>
+	<select id="selectHistoryStockDataTrack" parameterType="String" resultType="int">
+		select id from anyquant.historystockdatatrack
+		where grailId=#{value}
+	</select>
+	<update id="createHistoryStockDataTable" parameterType="String">
+		create table anyquant.historystockdata_${value}
+		(
+			id int(11) not null primary key auto_increment,
+			date Date not null,
+			open double,
+			close double,
+			increase double,
+			incrPer double,
+			low double,
+			high double,
+			volume long,
+			amount double,
+			turnover double
+		)
+	</update>
+	<update id="deleteHistoryStockDataTable" parameterType="String">
+		drop table anyquant.historystockdata_${value}
+	</update>
+	<insert id="insertHistoryStockData" parameterType="HistoryStockDataPack">
+		insert into anyquant.historystockdata_${gid}
+		(date,open,close,increase,incrPer,low,high,volume,amount,turnover)
+		values(#{historyStockData.date},#{historyStockData.open},#{historyStockData.close},#{historyStockData.increase},#{historyStockData.incrPer},#{historyStockData.low},#{historyStockData.high},#{historyStockData.volume},#{historyStockData.amount},#{historyStockData.turnover})
+	</insert>
+</mapper>

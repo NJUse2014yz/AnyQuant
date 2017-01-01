@@ -1,0 +1,128 @@
+*{
+	font-family:"Microsoft YaHei";
+}
+.bodycontent{
+	overflow-y:scroll;
+}
+.stock-top{
+	position:relative;
+	top:10px;
+	width:100%;
+	height:40px;
+}
+h1{
+	position:relative;
+	float:left;
+	left:20px;
+	width:140px;
+	text-align:center;
+	font-family: "PMingLiU";
+	color: #3c4e27;
+}
+h3{
+	position:relative;
+	float:left;
+	left:35px;
+	width:220px;
+	top:16px;
+	font-family: "FangSong";
+	font-size:16px;
+	color: #3c4e27;
+}
+.ss-menu,.grail-industry,.stockall-table{
+	position:relative;
+	width:100%;
+	height:250px;
+	top:15px;
+	border-top:1px solid gray;
+}
+.grail-industry{
+	top:20px;
+	height:400px;
+}
+.ssm-name{
+	position:relative;
+	width:100%;
+	height:50px;
+}
+.shape{
+	width: 0px; 
+	height: 0px; 
+	border-right: 20px solid transparent; 
+	border-top: 20px solid rgb(70,36,69); 
+	border-left: 20px solid rgb(70,36,69); 
+	border-bottom: 20px solid rgb(70,36,69); 
+	border-top-left-radius: 20px; 
+	border-top-right-radius: 20px; 
+	border-bottom-left-radius: 20px; 
+	border-bottom-right-radius: 20px;
+	position:relative;
+	top:5px;
+	left:15px;
+	float:left;
+}
+.ssmname{
+	font: "PMingLiU";
+	font-size:18px;
+	color: #462445;
+	position:relative;
+	top:15px;
+	left:15px;
+}
+.grail-ul{
+	position:relative;
+	width:100%;
+	height:200px;
+	top:7px;
+}
+.sh-li,.sz-li{
+	position:relative;
+	width:500px;
+	height:190px;
+	float:left;
+	left:120px;
+	border: 1px solid gray;
+}
+.sz-li{
+	left:240px;
+	hight:190px;
+}
+.sh-container,.sz-container{
+	width:40%;
+	height:100%;
+	background-color:rgb(70,36,69);
+}
+.sh-name,.sz-name{
+	display:block;
+	color: white;
+	text-align: center;
+	border-bottom: 1px solid white;
+}
+.sh-close,.sz-close{
+	color: white;
+	font-size: 30px;
+	padding:4px 20px;
+}
+.sh-updown-per,.sz-updown-per{
+	color: white;
+	font-size: 13px;
+	padding:5px 20px;
+	border-bottom: 1px double white;
+}
+.sh-vol,.sh-vol-n,.sh-updown li,.sz-vol,.sz-vol-n,.sz-updown li{
+	color:white;
+	font-size: 14px;
+	padding: 5px 20px;
+}
+.sh-vol-n,.sz-vol-n{
+	border-bottom: 1px double white;
+}
+.sh-updown,.sz-updown{
+	margin:0 auto;
+}
+.sh-updown li,.sz-updown li{
+	width:33%;
+	padding:5px 0px;
+	float:left;
+	text-align: center;
+}

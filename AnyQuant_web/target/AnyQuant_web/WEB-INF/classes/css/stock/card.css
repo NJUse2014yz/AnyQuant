@@ -1,0 +1,85 @@
+div.card{
+	position:absolute;
+	width:200px;
+	height:100px;
+	top:100px;
+}
+
+div.pinkCard{
+	left:80px;
+	color: white;
+	border-top-right-radius:10px; 
+	border-top-left-radius:10px; 
+	border-bottom-left-radius:10px;
+	border-bottom-right-radius:10px;
+    background-color: #d9544f;
+}
+
+div.blueCard{
+	left:330px;/*segment is 40px*/
+	color:white;
+	border-top-right-radius:10px; 
+	border-top-left-radius:10px; 
+	border-bottom-left-radius:10px;
+	border-bottom-right-radius:10px;
+	background-color: #418bca;
+	
+}
+
+div.greenCard{
+	left:580px;
+	color:white;
+	background-color: #16a085;
+	border-top-right-radius:10px; 
+	border-top-left-radius:10px; 
+	border-bottom-left-radius:10px;
+	border-bottom-right-radius:10px;
+}
+
+div.grayCard{
+	left:830px;
+	color:white;
+	background-color: #3f4e62;
+	border-top-right-radius:10px; 
+	border-top-left-radius:10px; 
+	border-bottom-left-radius:10px;
+	border-bottom-right-radius:10px;
+}
+
+div.orangeCard{
+	left:1080px;
+	color:white;
+	background-color: #ffc100;
+	border-top-right-radius:10px; 
+	border-top-left-radius:10px; 
+	border-bottom-left-radius:10px;
+	border-bottom-right-radius:10px;
+}
+
+.card small{
+	font-size: 20px;
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 400;
+    position:absolute;
+    top:30px;
+    left:130px;
+}
+
+.card h2{
+	font-family: "Roboto", "Arial", sans-serif;
+    font-weight: 400;
+    position:absolute;
+    font-size:40px;
+    top:60px;
+    left:130px;
+}
+
+.card img{
+	position:absolute;
+	top:15px;
+	left:15px;
+	width:100px;
+	height:100px;
+}
+
+

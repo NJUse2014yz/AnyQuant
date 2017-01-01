@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.GrailInfMapper">
+	<update id="createGrailInfTable">
+		create table anyquant.grailinf
+		(
+			id int(11) not null primary key auto_increment,
+			grailId varchar(16) not null
+		)
+	</update>
+	<insert id="insertGrailInf" parameterType="String">
+		insert into anyquant.grailinf(grailId)
+		values(#{value})
+	</insert>
+</mapper>

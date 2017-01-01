@@ -1,0 +1,69 @@
+html{
+	overflow-y: auto;
+}
+.backtest{
+	position:relative;
+	width:100%;
+	height:390px;
+	
+	top:10px;
+	z-index: -1;
+}
+.backtest-t1,.backtest-t2{
+	float: left;
+	border: none;	
+	width:56px;
+}
+.backtest-t1{
+	position:relative;
+	padding-top:5px;
+	text-align:center;
+	margin-left:75px;
+	margin-top:15px;
+	border-top: 5px solid rgb(70,36,69);
+}
+.backtest-t2{
+	text-align:left;
+	margin-top:25px;
+}
+
+.backtest-result{
+	position:relative;
+	width:80%;
+	height:340px;	
+	top:70px;
+	margin:0 auto;
+	border-radius: 40px;
+	border:1px solid gray;
+}
+#backtest-line{
+	position:relative;
+	width:64%;
+	height:100%;
+	float:left;
+	border-right: 1px dashed gray;
+}
+.backtest-data{
+	position:relative;
+	width:28%;
+	height:100%;
+	float:left;
+}
+.back-datas{
+	width:100%;
+	height:10%;
+	text-align:left;
+	padding-left: 50px;
+	color:rgb(70,36,69);
+}
+.annualizedReturns{
+	margin-top: 25px;
+}
+.r1{
+	position:absolute;
+	width:64%;
+	height:100px;
+	text-align: center;
+	line-height: 100px;
+	top: 120px;
+}

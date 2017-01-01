@@ -1,0 +1,8 @@
+history data
+history week data
+history month data
+quota data
+industry data
+area data
+concept data
+recommend data

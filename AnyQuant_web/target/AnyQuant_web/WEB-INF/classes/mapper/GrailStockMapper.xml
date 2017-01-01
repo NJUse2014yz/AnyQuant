@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.GrailStockMapper">
+	<update id="createGrailStockTable" parameterType="String">
+		create table anyquant.grailstock_${value}
+		(
+			id int(11) not null primary key auto_increment,
+			gid varchar(16) not null,
+			name varchar(32)
+		)
+	</update>
+	<insert id="insertGrailStock" parameterType="GrailStock">
+		insert into anyquant.grailstock_${grailId}(gid,name)
+		values(#{stockInf.gid},#{stockInf.name})
+	</insert>
+	<select id="countGrailStock" parameterType="String" resultType="int">
+		select count(*) from anyquant.grailstock_${value}
+	</select>
+	<select id="selectGrailStockId" parameterType="GrailStock" resultType="int">
+		select id from anyquant.grailstock_${grailId}
+		where gid=#{stockInf.gid}
+	</select>
+	<select id="selectGrailStock" parameterType="String" resultType="StockInf">
+		select gid,name from anyquant.grailstock_${value}
+	</select>
+	<select id="selectGrailStock_part" parameterType="GrailStock" resultType="StockInf">
+		select gid,name from anyquant.grailstock_${grailId}
+		where id &gt;= #{id}
+	</select>
+	<select id="selectGrailStock_id" parameterType="GrailStock" resultType="StockInf">
+		select gid,name from anyquant.grailstock_${grailId}
+		where id=#{id}
+	</select>
+</mapper>

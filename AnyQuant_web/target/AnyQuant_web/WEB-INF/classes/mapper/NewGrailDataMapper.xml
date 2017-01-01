@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.NewGrailDataMapper">
+	<update id="createNewGrailDataTable">
+		create table anyquant.newgraildata
+		(
+			id int(11) not null primary key auto_increment,
+			grailId varchar(16) not null,
+			dealNum long,
+			dealPri double,
+			highPri double,
+			increPer double,
+			increase double,
+			lowpri double,
+			name varchar(32),
+			nowpri double,
+			openPri double,
+			time Date,
+			yesPri double
+		)
+	</update>
+	<insert id="insertNewGrailData" parameterType="NewGrailData">
+		insert into anyquant.newgraildata
+		(grailId,dealNum,dealPri,highPri,increPer,increase,lowpri,name,nowpri,time,yesPri)
+		values(#{grailId},#{dealNum},#{dealPri},#{highPri},#{increPer},#{increase},#{lowpri},#{name},#{nowpri},#{time},#{yesPri})
+	</insert>
+	<select id="selectNewGrailData" parameterType="String" resultType="NewGrailData">
+		select * from anyquant.newgraildata
+		where grailId=#{value}
+	</select>
+</mapper>

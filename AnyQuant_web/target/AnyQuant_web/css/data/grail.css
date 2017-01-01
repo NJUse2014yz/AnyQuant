@@ -1,0 +1,112 @@
+*{
+	font-family:"Microsoft YaHei";
+}
+.bodycontent{
+	overflow: scroll;
+}
+.grail-top{
+	position:relative;
+	top:10px;
+	width:100%;
+	height:40px;
+}
+h1{
+	position:relative;
+	float:left;
+	left:20px;
+	width:140px;
+	text-align:center;
+	font-family: "PMingLiU";
+	color: #3c4e27;
+}
+h3{
+	position:relative;
+	float:left;
+	left:35px;
+	width:80%;
+	top:18px;
+	font-family: "FangSong";
+	font-size:15px;
+	color: #3c4e27;
+}
+.ssm-name{
+	position:relative;
+	width:100%;
+	height:50px;
+}
+.shape{
+	width: 0px; 
+	height: 0px; 
+	border-right: 20px solid transparent; 
+	border-top: 20px solid rgb(70,36,69); 
+	border-left: 20px solid rgb(70,36,69); 
+	border-bottom: 20px solid rgb(70,36,69); 
+	border-top-left-radius: 20px; 
+	border-top-right-radius: 20px; 
+	border-bottom-left-radius: 20px; 
+	border-bottom-right-radius: 20px;
+	position:relative;
+	top:5px;
+	left:15px;
+	float:left;
+}
+.ssmname{
+	font: "PMingLiU";
+	font-size:18px;
+	color: #462445;
+	position:relative;
+	top:15px;
+	left:15px;
+}
+.cards{
+	position:relative;
+	width:100%;
+	height:180px;
+	top:15px;
+	border-top: 1px solid gray;
+}
+.grail-k{
+	position:relative;
+	width:100%;
+	height:400px;
+	top:15px;
+	border-top: 1px solid gray;
+}
+.stockall-table{
+	position:relative;
+	width:100%;
+	height:400px;
+	top:15px;
+	border-top: 1px solid gray;
+}
+/*‘≤»Û±ﬂΩ«*/
+.chart{
+	border-top-right-radius:50px; 
+	border-top-left-radius:50px; 
+	border-bottom-left-radius:50px;
+	border-bottom-right-radius:50px;
+}
+.kLine{
+	min-width:450px;
+	height:300px;
+	position: absolute;
+	width:600px;
+	left:100px;
+	z-index:-1;
+}
+
+.price{
+	min-width:450px;
+	height:300px;
+	position: absolute;
+	width:600px;
+	left:700px;
+	z-index:-1;
+
+}
+div.card{
+	position:absolute;
+	width:200px;
+	height:100px;
+	top:60px;
+}

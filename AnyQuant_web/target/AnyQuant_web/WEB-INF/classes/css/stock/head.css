@@ -1,0 +1,18 @@
+.companyName {
+	margin: 0;
+	position: absolute;
+	top: 50px;
+	left:15px;
+	color: rgba(74, 96, 138, 0.8);
+    font-size: 32px;
+    font-weight: 700;
+    font-family: "Roboto", "Arial", sans-serif;
+}
+
+.headImage{
+	position: absolute;
+	top:55px;
+	height:30px;
+	width:30px;
+	left:150px;
+}

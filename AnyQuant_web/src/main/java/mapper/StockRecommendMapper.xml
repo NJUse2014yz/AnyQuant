@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.StockRecommendMapper">
+	<update id="createStockRecommendTable">
+		create table anyquant.stockrecommend
+		(
+			sid varchar(16) not null,
+			name varchar(32),
+			p_change double,
+			recinf varchar(10000)
+		)default charset=utf8
+	</update>
+	<delete id="deleteStockRecommend_all">
+		delete from anyquant.stockrecommend
+	</delete>
+	<insert id="insertStockRecommend_list" parameterType="List">
+		insert into anyquant.stockrecommend
+		(sid,name,p_change,recinf)
+		values
+		<foreach collection="list" item="strategyRecInfString" separator=",">
+			(#{strategyRecInfString.sid},#{strategyRecInfString.name},
+			#{strategyRecInfString.p_change},#{strategyRecInfString.recinf})
+		</foreach>
+	</insert>
+	<insert id="insertStockRecommend_single" parameterType="StrategyRecInfString">
+		insert into anyquant.stockrecommend
+		(sid,name,p_change,recinf)
+		values(#{sid},#{name},#{p_change},#{recinf})
+	</insert>
+	
+	<select id="selectStockRecommend_list" resultType="StrategyRecInfString">
+		select * from anyquant.stockrecommend
+		order by p_change asc
+	</select>
+	
+</mapper>

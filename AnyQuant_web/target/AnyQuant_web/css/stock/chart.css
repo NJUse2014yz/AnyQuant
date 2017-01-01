@@ -1,0 +1,25 @@
+/*‘≤»Û±ﬂΩ«*/
+.chart{
+	border-top-right-radius:50px; 
+	border-top-left-radius:50px; 
+	border-bottom-left-radius:50px;
+	border-bottom-right-radius:50px;
+}
+
+.kLine{
+	min-width:600px;
+	height:350px;
+	position: absolute;
+	top:250px;
+	left:80px;
+	z-index:0
+}
+
+.price{
+	min-width:600px;
+	height:350px;
+	position: absolute;
+	top:250px;
+	left:690px;
+	z-index:0
+}

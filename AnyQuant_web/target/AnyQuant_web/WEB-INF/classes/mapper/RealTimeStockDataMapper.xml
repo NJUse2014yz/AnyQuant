@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.RealTimeStockDataMapper">
+	<update id="createRealTimeStockDataTable" parameterType="String">
+		create table AnyQuant.RealTimeStockData_${value}
+			(
+				id int(11) not null primary key auto_increment,
+				gid varchar(16) not null,
+			    increPer double,
+			    increase double,
+			    name varchar(32),
+			    todayStartPri double,
+			    yestodEndPri double,
+			    nowPri double,
+			    todayMax double,
+			    todayMin double,
+			    competitivePri double,
+			    reservePri double,
+			    traNumber long,
+			    traAmount double,
+			    buyOne long,
+			    buyOnePri double,
+			    buyTwo long,
+			    buyTwoPri double,
+			    buyThree long,
+			    buyThreePri double,
+			    buyFour long,
+			    buyFourPri double,
+			    buyFive long,
+			    buyFivePri double,
+			    sellOne long,
+			    sellOnePri double,
+			    sellTwo long,
+			    sellTwoPri double,
+			    sellThree long,
+			    sellThreePri double,
+			    sellFour long,
+			    sellFourPri double,
+			    sellFive long,
+			    sellFivePri double,
+			    date date not null,
+			    time time not null
+			)
+	</update>
+	<delete id="deleteRealTimeStockDataTable" parameterType="String">
+		drop table anyquant.realtimestockdata_${value}
+	</delete>
+	<insert id="insertRealTimeStockData" parameterType="realTimeStockData">
+		insert into AnyQuant.RealTimeStockData_${gid}
+		(gid,increPer,increase,name,todayStartPri,yestodEndPri,nowPri,todayMax,todayMin,competitivePri,reservePri,traNumber,traAmount,buyOne,buyOnePri,buyTwo,buyTwoPri,buyThree,buyThreePri,buyFour,buyFourPri,buyFive,buyFivePri,sellOne,sellOnePri,sellTwo,sellTwoPri,sellThree,sellThreePri,sellFour,sellFourPri,sellFive,sellFivePri,date,time)
+		values(#{gid},#{increPer},#{increase},#{name},#{todayStartPri},#{yestodEndPri},#{nowPri},#{todayMax},#{todayMin},#{competitivePri},#{reservePri},#{traNumber},#{traAmount},#{buyOne},#{buyOnePri},#{buyTwo},#{buyTwoPri},#{buyThree},#{buyThreePri},#{buyFour},#{buyFourPri},#{buyFive},#{buyFivePri},#{sellOne},#{sellOnePri},#{sellTwo},#{sellTwoPri},#{sellThree},#{sellThreePri},#{sellFour},#{sellFourPri},#{sellFive},#{sellFivePri},#{date},#{time})
+	</insert>
+	<select id="selectRealTimeStockData_part" parameterType="realTimeStockData" resultType="realTimeStockData">
+		select * from AnyQuant.RealTimeStockData_${gid}
+		<where>
+			<if test="name!=null">
+				AND AnyQuant.RealTimeStockData_${gid}.name=#{name}
+			</if>
+			<if test="date!=null">
+				AND AnyQuant.RealTimeStockData_${gid}.date=#{date}
+			</if>
+			<if test="time!=null">
+				AND AnyQuant.RealTimeStockData_${gid}.time=#{time}
+			</if>			
+		</where>
+	</select>
+	<select id="selectRealTimeStockData_upAndLow" parameterType="realTimeStockDataQuery" resultType="realTimeStockData">
+		select * from AnyQuant.RealTimeStockData_${gid}
+		<where>
+			<if test="realTimeStockData_low!=null and realTimeStockData_upper!=null">
+				AND AnyQuant.RealTimeStockData_${gid}.increPer between #{realTimeStockData_low.increPer}
+				and #{realTimeStockData_upper.increPer}
+				
+				AND AnyQuant.RealTimeStockData_${gid}.increase &gt;= #{realTimeStockData_low.increase}
+				AND AnyQuant.RealTimeStockData_${gid}.increase &lt;= #{realTimeStockData_upper.increase}
+				
+				AND AnyQuant.RealTimeStockData_${gid}.todayStartPri &gt;= #{realTimeStockData_low.todayStartPri}
+				AND AnyQuant.RealTimeStockData_${gid}.todayStartPri &lt;= #{realTimeStockData_upper.todayStartPri}
+				
+				AND AnyQuant.RealTimeStockData_${gid}.yestodEndPri  &gt;= #{realTimeStockData_low.yestodEndPri}
+				AND AnyQuant.RealTimeStockData_${gid}.yestodEndPri &lt;= #{realTimeStockData_upper.yestodEndPri}
+				
+				AND AnyQuant.RealTimeStockData_${gid}.nowPri &gt;= #{realTimeStockData_low.nowPri}
+				AND AnyQuant.RealTimeStockData_${gid}.nowPri &lt;= #{realTimeStockData_upper.nowPri}
+				
+				AND AnyQuant.RealTimeStockData_${gid}.todayMax &gt;= #{realTimeStockData_low.todayMax}
+				AND AnyQuant.RealTimeStockData_${gid}.todayMax &lt;= #{realTimeStockData_upper.todayMax}
+				
+				AND AnyQuant.RealTimeStockData_${gid}.todayMin &gt;= #{realTimeStockData_low.todayMin}
+				AND AnyQuant.RealTimeStockData_${gid}.todayMin &lt;= #{realTimeStockData_upper.todayMin}
+				
+				AND AnyQuant.RealTimeStockData_${gid}.competitivePri &gt;= #{realTimeStockData_low.competitivePri}
+				AND AnyQuant.RealTimeStockData_${gid}.competitivePri &lt;= #{realTimeStockData_upper.competitivePri}
+
+				AND AnyQuant.RealTimeStockData_${gid}.reservePri &gt;= #{realTimeStockData_low.reservePri}
+				AND AnyQuant.RealTimeStockData_${gid}.reservePri &lt;= #{realTimeStockData_upper.reservePri}
+				
+				AND AnyQuant.RealTimeStockData_${gid}.traNumber &gt;= #{realTimeStockData_low.traNumber}
+				AND AnyQuant.RealTimeStockData_${gid}.traNumber &lt;= #{realTimeStockData_upper.traNumber}
+				
+				AND AnyQuant.RealTimeStockData_${gid}.traAmount &gt;= #{realTimeStockData_low.traAmount}
+				AND AnyQuant.RealTimeStockData_${gid}.traAmount &lt;= #{realTimeStockData_upper.traAmount}
+				
+				AND AnyQuant.RealTimeStockData_${gid}.buyOne &gt;= #{realTimeStockData_low.buyOne}
+				AND AnyQuant.RealTimeStockData_${gid}.buyOne &lt;= #{realTimeStockData_upper.buyOne}
+				
+				AND AnyQuant.RealTimeStockData_${gid}.buyOnePri &gt;= #{realTimeStockData_low.buyOnePri}
+				AND AnyQuant.RealTimeStockData_${gid}.buyOnePri &lt;= #{realTimeStockData_upper.buyOnePri}
+				
+				AND AnyQuant.RealTimeStockData_${gid}.buyTwo &gt;= #{realTimeStockData_low.buyTwo}
+				AND AnyQuant.RealTimeStockData_${gid}.buyTwo &lt;= #{realTimeStockData_upper.buyTwo}
+				
+				AND AnyQuant.RealTimeStockData_${gid}.buyTwoPri &gt;= #{realTimeStockData_low.buyTwoPri}
+				AND AnyQuant.RealTimeStockData_${gid}.buyTwoPri &lt;= #{realTimeStockData_upper.buyTwoPri}
+				
+				AND AnyQuant.RealTimeStockData_${gid}.buyThree &gt;= #{realTimeStockData_low.buyThree}
+				AND AnyQuant.RealTimeStockData_${gid}.buyThree &lt;= #{realTimeStockData_upper.buyThree}
+				
+				AND AnyQuant.RealTimeStockData_${gid}.buyThreePri &gt;= #{realTimeStockData_low.buyThreePri}
+				AND AnyQuant.RealTimeStockData_${gid}.buyThreePri &lt;= #{realTimeStockData_upper.buyThreePri}
+				
+				AND AnyQuant.RealTimeStockData_${gid}.buyFour &gt;= #{realTimeStockData_low.buyFour}
+				AND AnyQuant.RealTimeStockData_${gid}.buyFour &lt;= #{realTimeStockData_upper.buyFour}
+				
+				AND AnyQuant.RealTimeStockData_${gid}.buyFourPri &gt;= #{realTimeStockData_low.buyFourPri}
+				AND AnyQuant.RealTimeStockData_${gid}.buyFourPri &lt;= #{realTimeStockData_upper.buyFourPri}
+				
+				AND AnyQuant.RealTimeStockData_${gid}.buyFive &gt;= #{realTimeStockData_low.buyFive}
+				AND AnyQuant.RealTimeStockData_${gid}.buyFive &lt;= #{realTimeStockData_upper.buyFive}
+				
+				AND AnyQuant.RealTimeStockData_${gid}.buyFivePri &gt;= #{realTimeStockData_low.buyFivePri}
+				AND AnyQuant.RealTimeStockData_${gid}.buyFivePri &lt;= #{realTimeStockData_upper.buyFivePri}
+				
+				AND AnyQuant.RealTimeStockData_${gid}.sellOne &gt;= #{realTimeStockData_low.sellOne}
+				AND AnyQuant.RealTimeStockData_${gid}.sellOne &lt;= #{realTimeStockData_upper.sellOne}
+				
+				AND AnyQuant.RealTimeStockData_${gid}.sellOnePri &gt;= #{realTimeStockData_low.sellOnePri}
+				AND AnyQuant.RealTimeStockData_${gid}.sellOnePri &lt;= #{realTimeStockData_upper.sellOnePri}
+				
+				AND AnyQuant.RealTimeStockData_${gid}.sellTwo &gt;= #{realTimeStockData_low.sellTwo}
+				AND AnyQuant.RealTimeStockData_${gid}.sellTwo &lt;= #{realTimeStockData_upper.sellTwo}
+				
+				AND AnyQuant.RealTimeStockData_${gid}.sellTwoPri &gt;= #{realTimeStockData_low.sellTwoPri}
+				AND AnyQuant.RealTimeStockData_${gid}.sellTwoPri &lt;= #{realTimeStockData_upper.sellTwoPri}
+				
+				AND AnyQuant.RealTimeStockData_${gid}.sellThree &gt;= #{realTimeStockData_low.sellThree}
+				AND AnyQuant.RealTimeStockData_${gid}.sellThree &lt;= #{realTimeStockData_upper.sellThree}
+				
+				AND AnyQuant.RealTimeStockData_${gid}.sellThreePri &gt;= #{realTimeStockData_low.sellThreePri}
+				AND AnyQuant.RealTimeStockData_${gid}.sellThreePri &lt;= #{realTimeStockData_upper.sellThreePri}
+				
+				AND AnyQuant.RealTimeStockData_${gid}.sellFour &gt;= #{realTimeStockData_low.sellFour}
+				AND AnyQuant.RealTimeStockData_${gid}.sellFour &lt;= #{realTimeStockData_upper.sellFour}
+				
+				AND AnyQuant.RealTimeStockData_${gid}.sellFourPri &gt;= #{realTimeStockData_low.sellFourPri}
+				AND AnyQuant.RealTimeStockData_${gid}.sellFourPri &lt;= #{realTimeStockData_upper.sellFourPri}
+				
+				AND AnyQuant.RealTimeStockData_${gid}.sellFive &gt;= #{realTimeStockData_low.sellFive}
+				AND AnyQuant.RealTimeStockData_${gid}.sellFive &lt;= #{realTimeStockData_upper.sellFive}
+				
+				AND AnyQuant.RealTimeStockData_${gid}.sellFivePri &gt;= #{realTimeStockData_low.sellFivePri}
+				AND AnyQuant.RealTimeStockData_${gid}.sellFivePri &lt;= #{realTimeStockData_upper.sellFivePri}
+				
+				AND AnyQuant.RealTimeStockData_${gid}.sellFivePri &gt;= #{realTimeStockData_low.sellFivePri}
+				AND AnyQuant.RealTimeStockData_${gid}.sellFivePri &lt;= #{realTimeStockData_upper.sellFivePri}
+				
+				AND AnyQuant.RealTimeStockData_${gid}.date &gt;= #{realTimeStockData_low.date}
+				AND AnyQuant.RealTimeStockData_${gid}.date &lt;= #{realTimeStockData_upper.date}
+				
+				AND AnyQuant.RealTimeStockData_${gid}.time &gt;= #{realTimeStockData_low.time}
+				AND AnyQuant.RealTimeStockData_${gid}.time &lt;= #{realTimeStockData_upper.time}
+			</if>
+		</where>
+	</select>
+</mapper>

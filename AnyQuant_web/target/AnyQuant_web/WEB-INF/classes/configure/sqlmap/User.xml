@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+	namespace命名空降，用于对sql进行分类化管理，理解sql隔离
+	注意：使用mapper代理方法开发，namespace有特殊重要的作用
+-->
+
+<mapper namespace="test">
+	<!-- 在映射文件中配置很多sql语句 -->
+	<!-- 需求：通过id查询用户表的记录 -->
+	<!--
+		通过select执行数据库查询
+		id：标识映射文件中的sql
+		将sql语句封装到mappedStatement对象中，所以将id称为statement的id
+		parameterType:指定输入参数的类型，这里指定int型
+		#{}表示一个占位符号
+		#{id}：其中的id表示接收输入的参数，参数名称就是id，如果输入参数是简单类型，#{}中的参数名可以是value也可以是其他
+		resultType:指定sql输出结果的所映射的java对象类型，select指定resultType表示将单条记录映射成的java对象
+	-->
+	<select id="findUserById" parameterType="int" resultType="user">
+		SELECT * FROM learning.t_user WHERE user_id=#{id}
+	</select>
+	
+	<!--
+		根据用户名称模糊查询用户信息，可能返回多条
+		resultType:指定就是单条记录所映射的java对象类型
+		${}:表示拼接sql串，将接收到的参数的内容不加任何修饰拼接在sql中
+		使用${}拼接sql，引起sql注入，影响安全性
+		${name}:接收输入参数的内容，如果传入类型是简单类型，${}中只能使用value
+		${}中也可指定pojo的属性名，接收到pojo对象的属性值，mybatis通过OGNL获取对象的属性值，通过属性.属性.属性...的方法获取对象属性值
+	-->
+	<select id="findUserByName" parameterType="java.lang.String" resultType="po.User">
+		SELECT * FROM learning.t_user WHERE user_name LIKE '%${value}%'
+	</select>
+	
+	<!--
+		添加用户
+		parameterType:指定输入参数的类型是pojo(包括用户信息)
+		#{}中指定pojo的属性名，接收到pojo对象的属性值，mybatis通过OGNL获取对象的属性值，通过属性.属性.属性...的方法获取对象属性值
+		不要分号结束
+		id自增，写了也没用
+	-->
+	<insert id="insertUser" parameterType="po.User">
+		<!-- 
+			将插入数据的主键返回，返回到user对象中
+			SELECT LAST_INSERT_ID():得到刚刚insert进去记录的主键值，只适用于自增主键
+			keyProperty:将查询到的主键值设置到parameterType指定的对象的哪个属性
+			order:SELECT LAST_INSERT_ID()执行顺序，相对于insert语句来说它的执行顺序 
+			resultType:指定SELECT LAST_INSERT_ID()的结果类型
+		-->
+		<selectKey keyProperty="user_id" order="AFTER" resultType="java.lang.Integer">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		<!--
+			使用mysql的uuid()生成非自增主键
+			需要修改id字段类型为string长度设置成35位
+			先通过uuid()得到主键，将主键设置到user对象的user_id属性中
+			在insert执行时，从user对象中取出user_id属性值
+			执行uuid()语句在insert之前
+			<selectKey keyProperty="user_id" order="BEFORE" resultType="java.lang.String">
+				SELECT UUID()
+			</selectKey>
+		-->
+		<!--
+			通过oracle的序列生成主键
+			<selectKey keyProperty="user_id" order="BEFORE" resultType="java.lang.String">
+				SELECT 序列名.nextval()
+			</selectKey>
+		-->
+		<!-- INSERT INTO learning.t_user(user_id,user_name,user_password,user_email) values(#{user_id},#{user_name},#{user_password},#{user_email}) -->
+		INSERT INTO learning.t_user(user_name,user_password,user_email) values(#{user_name},#{user_password},#{user_email})
+	</insert>
+	
+	<!--
+		根据id值删除用户
+		需要传入用户的id
+	-->
+	<delete id="deleteUserById" parameterType="java.lang.Integer">
+		DELETE FROM learning.t_user WHERE user_id=#{id}
+	</delete>
+	
+	<!--
+		根据id更新用户
+		需要传入用户的id
+		需要传入用户的更新信息
+		parameterType指定user对象，包括了id和更新的信息，注意：id必须存在
+		#{id}:从输入user对象中获取id属性值
+	-->
+	<update id="updateUserById" parameterType="po.User">
+		UPDATE learning.t_user SET user_name=#{user_name},user_password=#{user_password},user_email=#{user_email} WHERE user_id=#{user_id}
+	</update>
+</mapper>
