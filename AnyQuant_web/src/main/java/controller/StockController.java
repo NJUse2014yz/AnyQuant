@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,7 @@ public class StockController {
 			list1=stockBl.getIndiceList(MarketType.SH);
 			list2=stockBl.getIndiceList(MarketType.SZ);
 			toplist=stockBl.getRank();
+			toplist=new ArrayList<StockTopInf>();
 			startlist = stockBl.getNewStocks();
 			endlist = stockBl.getHaltStock();
 		
